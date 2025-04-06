@@ -3,56 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siyasi Sözlük - 100+ Termin</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Siyasi Pusula Testi | 40 Suallıq Tam Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-content">
-            <div class="logo">
-                <i class="fas fa-landmark"></i>
-                <h1>Siyasi Sözlük</h1>
-            </div>
-            <p class="tagline">100-dən çox siyasi termin və anlayış</p>
+    <div class="container">
+        <header>
+            <h1>Sən siyasi spektrumun harasındasan?</h1>
+            <p>40 suallıq tam test • Cavablarınız qeyd edilmir</p>
+        </header>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+            <span id="progress-text">0/40</span>
         </div>
-    </header>
-
-    <main class="content-wrapper">
-        <section class="search-container">
-            <div class="search-box">
-                <input type="text" id="search" placeholder="Termin axtar... (Məs: 'Demokratiya')">
-                <button onclick="searchTerm()">
-                    <i class="fas fa-search"></i> Axtar
-                </button>
-            </div>
-            
-            <div class="quick-access">
-                <h3>Ən çox axtarılanlar:</h3>
-                <div class="term-tags" id="popular-terms">
-                    <!-- JavaScript ilə doldurulacaq -->
+        
+        <div id="quiz-container"></div>
+        
+        <div id="result-container" class="hidden">
+            <h2>Sizin Siyasi Mövqeyiniz</h2>
+            <div id="compass">
+                <div class="compass-axis"></div>
+                <div class="compass-axis vertical"></div>
+                <div id="marker">
+                    <div class="marker-pulse"></div>
                 </div>
             </div>
-        </section>
-
-        <section class="terms-container" id="terms-container">
-            <!-- Yalnız 3 termin göstəriləcək -->
-        </section>
-
-        <div class="show-more-container">
-            <button id="show-more-btn" class="show-more-btn">Daha çox termin göstər</button>
-        </div>
-    </main>
-
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="copyright">
-                <p>© 2023 Siyasi Sözlük | Bütün hüquqlar qorunur</p>
+            
+            <div class="result-text">
+                <h3 id="result-title"></h3>
+                <div class="result-details">
+                    <div class="detail-card economic">
+                        <span class="detail-label">İqtisadi</span>
+                        <span class="detail-value" id="economic-value"></span>
+                    </div>
+                    <div class="detail-card social">
+                        <span class="detail-label">Sosial</span>
+                        <span class="detail-value" id="social-value"></span>
+                    </div>
+                </div>
+                <p id="result-description"></p>
+            </div>
+            
+            <div class="certificate-section">
+                <h3>Sertifikatınızı Alın</h3>
+                <input type="text" id="user-name" placeholder="Adınızı daxil edin" maxlength="30">
+                <button id="generate-certificate">
+                    <i class="fas fa-certificate"></i> Sertifikat Yüklə
+                </button>
+                <canvas id="certificate-canvas" style="display:none;"></canvas>
+            </div>
+            
+            <div class="result-actions">
+                <button id="restart-btn">
+                    <i class="fas fa-redo"></i> Yenidən başla
+                </button>
             </div>
         </div>
-    </footer>
 
-    <script src="js/script.js"></script>
+        <footer>
+            <p>© 2023 Siyasi Pusula Testi | <a href="#" id="privacy-link">Məxfilik Siyasəti</a></p>
+            <p class="credit">by <a href="https://github.com/zectted" target="_blank" rel="noopener noreferrer">zectted</a></p>
+        </footer>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
