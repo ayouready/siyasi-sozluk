@@ -5,60 +5,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Siyasi Sözlük</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1><i class="fas fa-book-open"></i> Siyasi Sözlük</h1>
-            <p>Siyasi terminləri asanlıqla öyrənin</p>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-landmark"></i>
+                <h1>Siyasi Sözlük</h1>
+            </div>
+            <p class="tagline">Politik terminləri asan və əhatəli şəkildə öyrənin</p>
         </div>
     </header>
 
-    <main class="container">
-        <section class="search-section">
+    <main class="content-wrapper">
+        <section class="search-container">
             <div class="search-box">
-                <input type="text" id="search" placeholder="Termin axtar... (Məs: 'Koalisiya')">
-                <button onclick="searchTerm()"><i class="fas fa-search"></i></button>
+                <input type="text" id="search" placeholder="Termin axtar... (Məs: 'Referendum')">
+                <button onclick="searchTerm()">
+                    <i class="fas fa-search"></i> Axtar
+                </button>
             </div>
             
-            <div class="popular-terms">
-                <h3>Populyar Terminlər:</h3>
+            <div class="quick-access">
+                <h3>Tez Giriş:</h3>
                 <div class="term-tags">
-                    <span class="term-tag" onclick="showTerm('populizm')">Populizm</span>
-                    <span class="term-tag" onclick="showTerm('koalisiya')">Koalisiya</span>
-                    <span class="term-tag" onclick="showTerm('referendum')">Referendum</span>
-                    <span class="term-tag" onclick="showTerm('oppozisiya')">Oppozisiya</span>
-                    <span class="term-tag" onclick="showTerm('korrupsiya')">Korrupsiya</span>
+                    <span class="term-tag" onclick="showTerm('populizm')">
+                        <i class="fas fa-users"></i> Populizm
+                    </span>
+                    <span class="term-tag" onclick="showTerm('koalisiya')">
+                        <i class="fas fa-handshake"></i> Koalisiya
+                    </span>
+                    <span class="term-tag" onclick="showTerm('referendum')">
+                        <i class="fas fa-vote-yea"></i> Referendum
+                    </span>
                 </div>
             </div>
         </section>
 
-        <section class="term-container">
-            <article id="populizm" class="term-card">
+        <section class="terms-container">
+            <article id="populizm" class="term-card active">
                 <div class="term-header">
-                    <h2>Populizm</h2>
-                    <span class="term-category">Siyasi Strateji</span>
+                    <div class="term-title">
+                        <h2>Populizm</h2>
+                        <span class="term-category">Siyasi Strateji</span>
+                    </div>
+                    <div class="term-meta">
+                        <span><i class="far fa-clock"></i> Oxumaq: 2 dəq</span>
+                    </div>
                 </div>
                 <div class="term-body">
-                    <p class="term-definition">Xalqın qısa vadeli emosiyalarından və ehtiyaclarından istifadə edərək siyasi nüfuz qazanma strategiyası.</p>
-                    <div class="term-example">
-                        <h4><i class="fas fa-lightbulb"></i> Nümunə</h4>
-                        <p>"Əgər seçilsəm, hər vətəndaşa 1000 AZN verəcəyəm" vədi - real iqtisadi hesablamalar olmadan xalqın arzularına hitab etmək.</p>
+                    <div class="term-content">
+                        <p class="term-definition">
+                            Xalqın qısa vadeli emosiyalarından və əsas ehtiyaclarından istifadə edərək 
+                            siyasi nüfuz qazanma strategiyası. Əsasən sadə həllər təklif edərək mürəkkəb 
+                            problemləri gözdən qaçırmaqla xarakterizə olunur.
+                        </p>
+                        
+                        <div class="term-example">
+                            <h4><i class="fas fa-lightbulb"></i> Real həyat nümunəsi</h4>
+                            <p>
+                                "Əgər seçilsəm, hər vətəndaşa aylıq 1000 AZN verəcəyəm" kimi vədlər 
+                                real iqtisadi hesablamalar olmadan, birbaşa xalqın arzularına hitab edir.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </article>
 
-            <!-- Other term cards (koalisiya, referendum, oppozisiya, korrupsiya) with same structure -->
+            <!-- Digər termin kartları eyni strukturdadır -->
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>© 2023 Siyasi Sözlük | Bütün hüquqlar qorunur</p>
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Kömək</a>
+                <a href="#"><i class="fas fa-envelope"></i> Əlaqə</a>
+            </div>
+            
             <div class="social-links">
-                <a href="https://www.instagram.com/abdv.murad?igsh=Ynlqazk1dmxoMXdk&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/abdv.murad?igsh=Ynlqazk1dmxoMXdk&utm_source=qr" 
+                   target="_blank" class="instagram-link">
+                    <i class="fab fa-instagram"></i> @abdv.murad
+                </a>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 Siyasi Sözlük | Bütün hüquqlar qorunur</p>
             </div>
         </div>
     </footer>
