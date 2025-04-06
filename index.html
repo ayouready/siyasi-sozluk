@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siyasi Sözlük</title>
+    <title>Siyasi Sözlük - 100+ Termin</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -15,83 +15,38 @@
                 <i class="fas fa-landmark"></i>
                 <h1>Siyasi Sözlük</h1>
             </div>
-            <p class="tagline">Politik terminləri asan və əhatəli şəkildə öyrənin</p>
+            <p class="tagline">100-dən çox siyasi termin və anlayış</p>
         </div>
     </header>
 
     <main class="content-wrapper">
         <section class="search-container">
             <div class="search-box">
-                <input type="text" id="search" placeholder="Termin axtar... (Məs: 'Referendum')">
+                <input type="text" id="search" placeholder="Termin axtar... (Məs: 'Demokratiya')">
                 <button onclick="searchTerm()">
                     <i class="fas fa-search"></i> Axtar
                 </button>
             </div>
             
             <div class="quick-access">
-                <h3>Tez Giriş:</h3>
-                <div class="term-tags">
-                    <span class="term-tag" onclick="showTerm('populizm')">
-                        <i class="fas fa-users"></i> Populizm
-                    </span>
-                    <span class="term-tag" onclick="showTerm('koalisiya')">
-                        <i class="fas fa-handshake"></i> Koalisiya
-                    </span>
-                    <span class="term-tag" onclick="showTerm('referendum')">
-                        <i class="fas fa-vote-yea"></i> Referendum
-                    </span>
+                <h3>Ən çox axtarılanlar:</h3>
+                <div class="term-tags" id="popular-terms">
+                    <!-- JavaScript ilə doldurulacaq -->
                 </div>
             </div>
         </section>
 
-        <section class="terms-container">
-            <article id="populizm" class="term-card active">
-                <div class="term-header">
-                    <div class="term-title">
-                        <h2>Populizm</h2>
-                        <span class="term-category">Siyasi Strateji</span>
-                    </div>
-                    <div class="term-meta">
-                        <span><i class="far fa-clock"></i> Oxumaq: 2 dəq</span>
-                    </div>
-                </div>
-                <div class="term-body">
-                    <div class="term-content">
-                        <p class="term-definition">
-                            Xalqın qısa vadeli emosiyalarından və əsas ehtiyaclarından istifadə edərək 
-                            siyasi nüfuz qazanma strategiyası. Əsasən sadə həllər təklif edərək mürəkkəb 
-                            problemləri gözdən qaçırmaqla xarakterizə olunur.
-                        </p>
-                        
-                        <div class="term-example">
-                            <h4><i class="fas fa-lightbulb"></i> Real həyat nümunəsi</h4>
-                            <p>
-                                "Əgər seçilsəm, hər vətəndaşa aylıq 1000 AZN verəcəyəm" kimi vədlər 
-                                real iqtisadi hesablamalar olmadan, birbaşa xalqın arzularına hitab edir.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Digər termin kartları eyni strukturdadır -->
+        <section class="terms-container" id="terms-container">
+            <!-- Yalnız 3 termin göstəriləcək -->
         </section>
+
+        <div class="show-more-container">
+            <button id="show-more-btn" class="show-more-btn">Daha çox termin göstər</button>
+        </div>
     </main>
 
     <footer class="main-footer">
         <div class="footer-content">
-            <div class="footer-links">
-                <a href="#"><i class="fas fa-question-circle"></i> Kömək</a>
-                <a href="#"><i class="fas fa-envelope"></i> Əlaqə</a>
-            </div>
-            
-            <div class="social-links">
-                <a href="https://www.instagram.com/abdv.murad?igsh=Ynlqazk1dmxoMXdk&utm_source=qr" 
-                   target="_blank" class="instagram-link">
-                    <i class="fab fa-instagram"></i> @abdv.murad
-                </a>
-            </div>
-            
             <div class="copyright">
                 <p>© 2023 Siyasi Sözlük | Bütün hüquqlar qorunur</p>
             </div>
