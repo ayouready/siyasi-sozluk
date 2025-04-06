@@ -1,203 +1,119 @@
-/**
- * SİYASİ SÖZLÜK - Genişləndirilmiş Versiya
- * 100+ siyasi terminlə interaktiv lüğət
- */
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Bütün terminlər
-    const allTerms = [
-        {
-            id: "demokratiya",
-            title: "Demokratiya",
-            category: "Hökumət Sistemi",
-            definition: "Xalqın özünü idarə etmə sistemi, əsasən seçkilər və çoxpartiyalı sistem vasitəsilə həyata keçirilir. Hakimiyyət xalq tərəfindən seçilmiş nümayəndələr vasitəsilə həyata keçirilir.",
-            example: "Azərbaycan Respublikası konstitusiyasında qeyd olunduğu kimi dövlət idarəçiliyinin əsas formasıdır. Xalq öz nümayəndələrini müəyyən müddətə seçir və qərarvermə prosesində iştirak edir."
-        },
-        {
-            id: "konstitusiya",
-            title: "Konstitusiya",
-            category: "Hüquqi Sənəd",
-            definition: "Dövlətin əsas qanunu olaraq, dövlət quruluşunu, orqanların səlahiyyətlərini və vətəndaşların hüquq və vəzifələrini müəyyən edir.",
-            example: "Azərbaycan Respublikasının Konstitusiyası 1995-ci ildə qəbul edilmiş və dövlətimizin əsas qanunudur. Bütün digər qanunlar Konstitusiyaya zidd ola bilməz."
-        },
-        {
-            id: "parlament",
-            title: "Parlament",
-            category: "Qanunverici Orqan",
-            definition: "Qanunverici hakimiyyət orqanı. Dövlətin əsas qanunlarını qəbul edir, hökumət fəaliyyətinə nəzarət edir.",
-            example: "Azərbaycanda Milli Məclis 125 deputatdan ibarətdir və 5 il müddətinə seçilir. Deputatlar qanun layihələrini müzakirə edib qəbul edirlər."
-        },
-        // 97+ əlavə termin burada olacaq
-        {
-            id: "referendum",
-            title: "Referendum",
-            category: "Birbaşa Demokratiya",
-            definition: "Xalqın birbaşa səsverməsi ilə mühüm dövlət qərarlarının qəbul edilməsi üsulu.",
-            example: "1995-ci ildə Azərbaycanda Konstitusiya referendum keçirilmiş və yeni Konstitusiya qəbul edilmişdir."
-        },
-        {
-            id: "seçki",
-            title: "Seçki",
-            category: "Demokratik Proses",
-            definition: "Vətəndaşların səsverməsi ilə dövlət orqanlarının və yerli özünüidarəetmə orqanlarının formalaşdırılması prosesi.",
-            example: "Azərbaycanda prezident seçkiləri 7 il müddətinə, Milli Məclisə seçkilər isə 5 il müddətinə keçirilir."
-        },
-        {
-            id: "prezident",
-            title: "Prezident",
-            category: "Dövlət Başçısı",
-            definition: "Respublika ilə idarə olunan ölkələrdə dövlətin ali vəzifəli şəxsi. Xarici siyasətdə dövləti təmsil edir, silahlı qüvvələrin ali baş komandanıdır.",
-            example: "Azərbaycan Respublikasının Prezidenti dövlətimizin ali vəzifəli şəxsidir və xalq tərəfindən birbaşa seçkilər yolu ilə seçilir."
-        }
-    ];
-
-    // DOM elementləri
-    const searchInput = document.getElementById('search');
-    const searchButton = document.querySelector('.search-box button');
-    const termsContainer = document.getElementById('terms-container');
-    const popularTermsContainer = document.getElementById('popular-terms');
-    const showMoreBtn = document.getElementById('show-more-btn');
-
-    // Dəyişənlər
-    let visibleTermCount = 3;
-    const popularTerms = ['demokratiya', 'konstitusiya', 'parlament', 'referendum', 'seçki', 'prezident'];
-
-    // Ən çox axtarılan terminləri yüklə
-    function loadPopularTerms() {
-        popularTermsContainer.innerHTML = '';
-        popularTerms.forEach(termId => {
-            const term = allTerms.find(t => t.id === termId);
-            if (term) {
-                const tag = document.createElement('span');
-                tag.className = 'term-tag';
-                tag.innerHTML = `<i class="fas fa-search"></i> ${term.title}`;
-                tag.onclick = () => showTerm(term.id);
-                popularTermsContainer.appendChild(tag);
-            }
-        });
-    }
-
-    // Termin kartı yarat
-    function createTermCard(term) {
-        const card = document.createElement('article');
-        card.className = 'term-card';
-        card.id = term.id;
-        
-        card.innerHTML = `
-            <div class="term-header">
-                <div class="term-title">
-                    <h2>${term.title}</h2>
-                    <span class="term-category">${term.category}</span>
-                </div>
-            </div>
-            <div class="term-body">
-                <div class="term-content">
-                    <p class="term-definition">${term.definition}</p>
-                    
-                    <div class="term-example">
-                        <div class="term-example-content">
-                            <strong>Nümunə:</strong> ${term.example}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        return card;
-    }
-
-    // Terminləri yüklə
-    function loadTerms(count = 3) {
-        termsContainer.innerHTML = '';
-        const termsToShow = allTerms.slice(0, count);
-        
-        termsToShow.forEach(term => {
-            const card = createTermCard(term);
-            card.classList.add('active');
-            termsContainer.appendChild(card);
-        });
-    }
-
-    // Xüsusi termin göstər
-    function showTerm(termId) {
-        const term = allTerms.find(t => t.id === termId);
-        if (!term) return;
-
-        termsContainer.innerHTML = '';
-        const card = createTermCard(term);
-        card.classList.add('active');
-        termsContainer.appendChild(card);
-        
-        // Axtarış sahəsini yenilə
-        searchInput.value = term.title;
-        
-        // "Daha çox" düyməsini gizlət
-        showMoreBtn.style.display = 'none';
-    }
-
-    // Axtarış funksiyası
-    function searchTerm() {
-        const searchText = searchInput.value.trim().toLowerCase();
-        
-        if (!searchText) {
-            alert('Zəhmət olmasa axtarış sözü daxil edin!');
-            return;
-        }
-        
-        // Tam uyğunluq
-        const exactMatch = allTerms.find(
-            t => t.id === searchText.toLowerCase() || 
-            t.title.toLowerCase() === searchText
-        );
-        
-        if (exactMatch) {
-            showTerm(exactMatch.id);
-            return;
-        }
-        
-        // Qismən uyğunluq
-        const partialMatches = allTerms.filter(
-            t => t.title.toLowerCase().includes(searchText) || 
-            t.definition.toLowerCase().includes(searchText) ||
-            t.category.toLowerCase().includes(searchText)
-        );
-        
-        if (partialMatches.length > 0) {
-            termsContainer.innerHTML = '';
-            partialMatches.forEach(term => {
-                const card = createTermCard(term);
-                card.classList.add('active');
-                termsContainer.appendChild(card);
-            });
-            showMoreBtn.style.display = 'none';
-        } else {
-            alert('Axtarışınıza uyğun termin tapılmadı!\n\nZəhmət olmasa başqa açar sözlər yoxlayın.');
-        }
-    }
-
-    // Daha çox termin yüklə
-    function loadMoreTerms() {
-        visibleTermCount += 3;
-        if (visibleTermCount >= allTerms.length) {
-            visibleTermCount = allTerms.length;
-            showMoreBtn.style.display = 'none';
-        }
-        loadTerms(visibleTermCount);
-    }
-
-    // Hadisə dinləyiciləri
-    searchButton.addEventListener('click', searchTerm);
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') searchTerm();
-    });
-    showMoreBtn.addEventListener('click', loadMoreTerms);
-
-    // İlkin yükləmə
-    loadPopularTerms();
-    loadTerms(visibleTermCount);
+// 40 Tam Sual (20 İqtisadi + 20 Sosial)
+const questions = [
+    // İqtisadi (Sol=1-20)
+    {question: "Dövlət əsas xidmətləri (səhiyyə, təhsil) pulsuz təmin etməlidir", axis: "economic", direction: "left"},
+    {question: "Bazar iqtisadiyyatı ən səmərəli sistemdir", axis: "economic", direction: "right"},
+    {question: "Zənginlər daha çox vergi verməlidir", axis: "economic", direction: "left"},
+    {question: "Dövlət müəssisələri özəlləşdirilməlidir", axis: "economic", direction: "right"},
+    {question: "İşçilər şirkətlərdə səs hüququna malik olmalıdır", axis: "economic", direction: "left"},
+    {question: "Gömrük vergiləri minimuma endirilməlidir", axis: "economic", direction: "right"},
+    {question: "Əsas infrastruktur layihələri dövlət tərəfindən həyata keçirilməlidir", axis: "economic", direction: "left"},
+    {question: "Həmkarlar ittifaqları gücləndirilməlidir", axis: "economic", direction: "left"},
+    {question: "Dövlət sənayeyə müdaxilə etməməlidir", axis: "economic", direction: "right"},
+    {question: "Təqaüd sistemi dövlət tərəfindən təmin edilməlidir", axis: "economic", direction: "left"},
+    {question: "İstehsal vasitələri fərdlərə məxsus olmalıdır", axis: "economic", direction: "right"},
+    {question: "Torpaq özəlləşdirilməlidir", axis: "economic", direction: "right"},
+    {question: "Banklar dövlət nəzarətində olmalıdır", axis: "economic", direction: "left"},
+    {question: "İşsizlik müavinətləri artırılmalıdır", axis: "economic", direction: "left"},
+    {question: "Dövlət tərəfindən təbliğat aparılmalıdır", axis: "economic", direction: "left"},
+    {question: "İstehsalat dövlət tərəfindən planlaşdırılmalıdır", axis: "economic", direction: "left"},
+    {question: "İşçilər öz iş yerlərini idarə etməlidir", axis: "economic", direction: "left"},
+    {question: "Dövlət sənətkarlığı dəstəkləməlidir", axis: "economic", direction: "left"},
+    {question: "Tibb işçiləri daha çox maaş almalıdır", axis: "economic", direction: "left"},
+    {question: "İctimai nəqliyyat pulsuz olmalıdır", axis: "economic", direction: "left"},
     
-    // Əgər bütün terminlər göstərilibsə, düyməni gizlət
-    if (visibleTermCount >= allTerms.length) {
-        showMoreBtn.style.display = 'none';
+    // Sosial (21-40)
+    {question: "Hökumət şəxsi hüquqları ictimai təhlükəsizlik üçün məhdudlaşdıra bilər", axis: "social", direction: "authoritarian"},
+    {question: "Cins azlıqları eyni hüquqlara malik olmalıdır", axis: "social", direction: "libertarian"},
+    {question: "Əsgərlik məcburi olmalıdır", axis: "social", direction: "authoritarian"},
+    {question: "Dövlət mətbuatı nəzarət etməlidir", axis: "social", direction: "authoritarian"},
+    {question: "Narkotik maddələrin istifadəsi azad olmalıdır", axis: "social", direction: "libertarian"},
+    {question: "Din dövlət işlərindən ayrı olmalıdır", axis: "social", direction: "libertarian"},
+    {question: "Cinayətkarlara daha sərt cəzalar verilməlidir", axis: "social", direction: "authoritarian"},
+    {question: "Silah sahibliyi məhdudlaşdırılmalıdır", axis: "social", direction: "authoritarian"},
+    {question: "Hər kəs öz bədəni haqqında özü qərar verməlidir", axis: "social", direction: "libertarian"},
+    {question: "Milli mədəniyyət qorunmalıdır", axis: "social", direction: "authoritarian"},
+    {question: "Həbsxanalar islah üçün deyil, cəza üçün olmalıdır", axis: "social", direction: "authoritarian"},
+    {question: "İmmiqrantlar üçün daha sərt qaydalar tətbiq edilməlidir", axis: "social", direction: "authoritarian"},
+    {question: "Həyat hüququ hər şeydən üstün olmalıdır", axis: "social", direction: "libertarian"},
+    {question: "Dövlət sənətkarlığı dəstəkləməlidir", axis: "social", direction: "authoritarian"},
+    {question: "Uşaq baxçası dövlət tərəfindən təmin edilməlidir", axis: "social", direction: "authoritarian"},
+    {question: "Dövlət təhsil proqramlarını tənzimləməlidir", axis: "social", direction: "authoritarian"},
+    {question: "Hər kəs öz ailə qurumunu seçməkdə azad olmalıdır", axis: "social", direction: "libertarian"},
+    {question: "Milli təhlükəsizlik üçün şəxsi məlumatlar toplanmalıdır", axis: "social", direction: "authoritarian"},
+    {question: "Dövlət vətəndaşların şəxsi həyatına qarışmamalıdır", axis: "social", direction: "libertarian"},
+    {question: "Dövlət dinə müdaxilə etməməlidir", axis: "social", direction: "libertarian"}
+];
+
+// ... (keep all other existing JavaScript code the same) ...
+
+// Add certificate generation function at the bottom
+document.getElementById('generate-certificate').addEventListener('click', generateCertificate);
+
+function generateCertificate() {
+    const userName = document.getElementById('user-name').value.trim();
+    if (!userName) {
+        alert('Zəhmət olmasa adınızı daxil edin!');
+        return;
     }
-});
+
+    const canvas = document.getElementById('certificate-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 1200;
+    canvas.height = 848;
+
+    // Design certificate
+    ctx.fillStyle = '#f8f9fa';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Border
+    ctx.strokeStyle = '#e63946';
+    ctx.lineWidth = 15;
+    ctx.strokeRect(50, 50, canvas.width-100, canvas.height-100);
+    
+    // Header
+    ctx.fillStyle = '#1d3557';
+    ctx.font = 'bold 40px "Inter", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('SİYASİ PUSULA TESTİ NƏTİCƏ SERTİFİKATI', canvas.width/2, 150);
+    
+    // User name
+    ctx.fillStyle = '#e63946';
+    ctx.font = 'bold 60px "Inter", sans-serif';
+    ctx.fillText(userName.toUpperCase(), canvas.width/2, 280);
+    
+    // Result
+    ctx.fillStyle = '#212529';
+    ctx.font = '30px "Inter", sans-serif';
+    ctx.fillText('Siyasi Mövqeyiniz:', canvas.width/2, 350);
+    ctx.fillStyle = '#e63946';
+    ctx.font = 'bold 48px "Inter", sans-serif';
+    ctx.fillText(document.getElementById('result-title').textContent, canvas.width/2, 420);
+    
+    // Capture compass
+    const compass = document.getElementById('compass');
+    const marker = document.getElementById('marker');
+    const originalDisplay = marker.style.display;
+    marker.style.display = 'block';
+    
+    html2canvas(compass, {
+        backgroundColor: null,
+        scale: 2
+    }).then(compassCanvas => {
+        ctx.drawImage(compassCanvas, canvas.width/2 - 200, 450, 400, 400);
+        marker.style.display = originalDisplay;
+        
+        // Footer
+        ctx.fillStyle = '#6c757d';
+        ctx.font = '20px "Inter", sans-serif';
+        ctx.fillText('Test tarixi: ' + new Date().toLocaleDateString('az-AZ'), canvas.width/2, 900);
+        ctx.font = '16px "Inter", sans-serif';
+        ctx.fillText('by zectted • siyasipusula.az', canvas.width/2, 930);
+        
+        // Download
+        const link = document.createElement('a');
+        link.download = `Siyasi_Pusula_${userName.replace(/\s+/g, '_')}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    });
+}
