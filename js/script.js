@@ -1,75 +1,94 @@
+/**
+ * SİYASİ SÖZLÜK - İnteraktiv Funksiyalar
+ * Versiya 2.0 | Təkmilləşdirilmiş
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
+    // DOM elementləri
+    const searchInput = document.getElementById('search');
+    const searchButton = document.querySelector('.search-box button');
+    const termTags = document.querySelectorAll('.term-tag');
+    const termCards = document.querySelectorAll('.term-card');
+    
     // Terminlər obyekti
-    const terms = {
-        'populizm': document.getElementById('populizm'),
-        'koalisiya': document.getElementById('koalisiya'),
-        'referendum': document.getElementById('referendum'),
-        'oppozisiya': document.getElementById('oppozisiya'),
-        'korrupsiya': document.getElementById('korrupsiya')
-    };
+    const terms = {};
+    termCards.forEach(card => {
+        terms[card.id] = card;
+    });
 
     // Bütün terminləri gizlətmək
     function hideAllTerms() {
-        Object.values(terms).forEach(term => {
-            term.classList.remove('active');
+        termCards.forEach(card => {
+            card.classList.remove('active');
         });
     }
 
-    // Müəyyən bir termini göstərmək
+    // Termin göstərmək
     function showTerm(termId) {
-        hideAllTerms();
-        
-        if (terms[termId]) {
-            terms[termId].classList.add('active');
-            document.getElementById('search').value = termId;
-            
-            // Terminə qaydırma animasiyası
-            setTimeout(() => {
-                terms[termId].scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }, 100);
+        if (!terms[termId]) {
+            console.error(`Termin tapılmadı: ${termId}`);
+            return;
         }
+        
+        hideAllTerms();
+        terms[termId].classList.add('active');
+        searchInput.value = termId;
+        
+        // Animasiya ilə scroll etmək
+        setTimeout(() => {
+            terms[termId].scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }, 100);
     }
 
     // Axtarış funksiyası
     function searchTerm() {
-        const searchText = document.getElementById('search').value.trim().toLowerCase();
+        const searchText = searchInput.value.trim().toLowerCase();
         
         if (!searchText) {
             alert('Zəhmət olmasa axtarış sözü daxil edin!');
             return;
         }
         
-        const foundTerm = Object.keys(terms).find(term => 
-            term.includes(searchText) || 
-            terms[term].querySelector('h2').textContent.toLowerCase().includes(searchText)
-        );
-        
-        if (foundTerm) {
-            showTerm(foundTerm);
-        } else {
-            alert('Termin tapılmadı! Aşağıdakı populyar terminlərdən birini yoxlaya bilərsiniz: \n\n' + 
-                  Object.keys(terms).map(t => t.charAt(0).toUpperCase() + t.slice(1)).join(', '));
+        // Dəqiq uyğunluq
+        if (terms[searchText]) {
+            showTerm(searchText);
+            return;
         }
+        
+        // Qismən uyğunluq
+        for (const [termId, card] of Object.entries(terms)) {
+            const title = card.querySelector('h2').textContent.toLowerCase();
+            if (title.includes(searchText)) {
+                showTerm(termId);
+                return;
+            }
+        }
+        
+        // Uyğunluq tapılmadı
+        alert('Axtarışa uyğun termin tapılmadı!\n\nMövcud terminlər:\n' + 
+              Object.keys(terms).map(term => 
+                term.charAt(0).toUpperCase() + term.slice(1)
+              ).join(', '));
     }
 
-    // Enter düyməsi ilə axtarış
-    document.getElementById('search').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            searchTerm();
-        }
-    });
-
-    // Populyar termin teqlərinə klik üçün hadisə dinləyiciləri
-    document.querySelectorAll('.term-tag').forEach(tag => {
-        tag.addEventListener('click', function() {
-            const termId = this.textContent.toLowerCase();
+    // Hadisə dinləyiciləri
+    searchButton.addEventListener('click', searchTerm);
+    searchInput.addEventListener('keypress', (e) => e.key === 'Enter' && searchTerm());
+    
+    termTags.forEach(tag => {
+        tag.addEventListener('click', () => {
+            const termId = tag.textContent.toLowerCase().replace(/\s+/g, '');
             showTerm(termId);
         });
     });
 
-    // Sayt yüklənəndə ilk termini göstər
+    // İlk terminin göstərilməsi
     showTerm('populizm');
+    
+    // Debug məlumatı
+    console.log('Siyasi Sözlük uğurla yükləndi!');
+    console.log('Mövcud terminlər:', Object.keys(terms));
 });
