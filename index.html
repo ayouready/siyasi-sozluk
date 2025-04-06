@@ -3,33 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siyasi Sözlük</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Modern Politik Sözlük</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>Siyasi Sözlük</h1>
-        <p>Terminləri sadə izah və vizualla öyrən</p>
+        <div class="container">
+            <h1><i class="fas fa-book-open"></i> Politik Sözlük</h1>
+            <p>Siyasi terminləri asanlıqla öyrənin</p>
+        </div>
     </header>
 
-    <main>
-        <div class="search-section">
-            <input type="text" id="searchInput" placeholder="Termin axtar...">
-            <button onclick="searchTerm()">Axtar</button>
-        </div>
+    <main class="container">
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" id="search" placeholder="Termin axtar... (Məs: 'Koalisiya')">
+                <button onclick="searchTerm()"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="popular-terms">
+                <h3>Populyar Terminlər:</h3>
+                <div class="term-tags">
+                    <span class="term-tag" onclick="showTerm('populizm')">Populizm</span>
+                    <span class="term-tag" onclick="showTerm('koalisiya')">Koalisiya</span>
+                    <span class="term-tag" onclick="showTerm('referendum')">Referendum</span>
+                    <span class="term-tag" onclick="showTerm('oppozisiya')">Oppozisiya</span>
+                    <span class="term-tag" onclick="showTerm('korrupsiya')">Korrupsiya</span>
+                </div>
+            </div>
+        </section>
 
-        <section id="termDisplay" class="term-display"></section>
+        <section class="term-container">
+            <article id="populizm" class="term-card">
+                <div class="term-header">
+                    <h2>Populizm</h2>
+                    <span class="term-category">Siyasi Strateji</span>
+                </div>
+                <div class="term-body">
+                    <p class="term-definition">Xalqın qısa vadeli emosiyalarından və ehtiyaclarından istifadə edərək siyasi nüfuz qazanma strategiyası.</p>
+                    <div class="term-example">
+                        <h4><i class="fas fa-lightbulb"></i> Nümunə</h4>
+                        <p>"Əgər seçilsəm, hər vətəndaşa 1000 AZN verəcəyəm" vədi - real iqtisadi hesablamalar olmadan xalqın arzularına hitab etmək.</p>
+                    </div>
+                    <div class="term-image">
+                        <img src="images/populizm.jpg" alt="Populizm karikaturası">
+                    </div>
+                </div>
+            </article>
 
-        <section class="popular">
-            <h2>Ən Populyar 10 Termin</h2>
-            <div class="tags" id="popularTags"></div>
+            <article id="koalisiya" class="term-card">
+                <div class="term-header">
+                    <h2>Koalisiya</h2>
+                    <span class="term-category">Hökumət Quruluşu</span>
+                </div>
+                <div class="term-body">
+                    <p class="term-definition">Bir neçə siyasi partiyanın birgə hökumət qurmaq üçün ittifaq yaratması.</p>
+                    <div class="term-example">
+                        <h4><i class="fas fa-lightbulb"></i> Nümunə</h4>
+                        <p>2020-ci ildə X partiyası və Y partiyası seçkilərdən sonra koalisiya hökuməti qurdu, çünki heç biri tək başına çoxluq qazana bilmədi.</p>
+                    </div>
+                    <div class="term-image">
+                        <img src="images/koalisiya.png" alt="Koalisiya şərti">
+                    </div>
+                </div>
+            </article>
+
+            <article id="referendum" class="term-card">
+                <div class="term-header">
+                    <h2>Referendum</h2>
+                    <span class="term-category">Səsvermə</span>
+                </div>
+                <div class="term-body">
+                    <p class="term-definition">Xalqın birbaşa səs verməsi ilə mühüm qərarın qəbul edilməsi prosesi.</p>
+                    <div class="term-example">
+                        <h4><i class="fas fa-lightbulb"></i> Nümunə</h4>
+                        <p>2016-cı ildə Böyük Britaniyanın Avropa İttifaqından çıxması (Brexit) referendumla qərar verildi.</p>
+                    </div>
+                    <div class="term-image">
+                        <img src="images/referendum.jpg" alt="Referendum karikaturası">
+                    </div>
+                </div>
+            </article>
+
+            <article id="oppozisiya" class="term-card">
+                <div class="term-header">
+                    <h2>Oppozisiya</h2>
+                    <span class="term-category">Siyasi Qruplaşma</span>
+                </div>
+                <div class="term-body">
+                    <p class="term-definition">Hakimiyyətdə olmayan və hökumət siyasətinə qarşı çıxan siyasi qruplar.</p>
+                    <div class="term-example">
+                        <h4><i class="fas fa-lightbulb"></i> Nümunə</h4>
+                        <p>Azərbaycan Milli Məclisində 2023-cü il vəziyyətinə görə 6 partiya təmsil olunur, onlardan 5-i hakim partiyadır, 1-i isə rəsmi oppozisiyadır.</p>
+                    </div>
+                    <div class="term-image">
+                        <img src="images/oppozisiya.jpg" alt="Oppozisiya rolu">
+                    </div>
+                </div>
+            </article>
+
+            <article id="korrupsiya" class="term-card">
+                <div class="term-header">
+                    <h2>Korrupsiya</h2>
+                    <span class="term-category">Siyasi Problem</span>
+                </div>
+                <div class="term-body">
+                    <p class="term-definition">Dövlət qulluqçularının vəzifə vəhdələrindən şəxsi mənfəət üçün istifadə etməsi.</p>
+                    <div class="term-example">
+                        <h4><i class="fas fa-lightbulb"></i> Nümunə</h4>
+                        <p>Rüşvət almaq, yaxın qohumları vəzifəyə təyin etmək (nepotizm), dövlət əmlakını şəxsi məqsədlər üçün istifadə etmək.</p>
+                    </div>
+                    <div class="term-image">
+                        <img src="images/korrupsiya.jpg" alt="Korrupsiya nümunələri">
+                    </div>
+                </div>
+            </article>
         </section>
     </main>
 
     <footer>
-        <p>© 2025 Siyasi Sözlük | sadə və vizual izahlarla siyasət</p>
+        <div class="container">
+            <p>© 2023 Modern Politik Sözlük | Bütün hüquqlar qorunur</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
